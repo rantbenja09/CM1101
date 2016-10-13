@@ -78,9 +78,10 @@ def print_inventory_items(items):
     <BLANKLINE>
 
     """
-    format_items1 = list_of_items(items)
-    print("You have",format_items1+".")
-    print()
+    if items:
+        print("You have " + list_of_items(items)+".\n")
+    else:
+        print("There is nothing in your inventory.\n")
 
 
 def print_room(room):
@@ -208,9 +209,16 @@ def print_menu(exits, room_items, inv_items):
         # Print the exit name and where it leads to
         print_exit(direction, exit_leads_to(exits, direction))
 
-    #
-    # COMPLETE ME!
-    #
+    for items in current_room['items']:
+        print('TAKE ' + items['id'].upper() + ' to take a ' + items['name'] + '.')
+       
+
+    for items in inv_items:
+        items_inven= list_of_items(inv_items).split(', ')
+        for x in items_inven:
+            item_name = items['name']
+            if x == item_name:
+                print('DROP ' + items['id'].upper() + ' to drop your ' + items['name'] + '.') 
     
     print("What do you want to do?")
 
